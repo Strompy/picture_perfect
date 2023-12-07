@@ -33,4 +33,24 @@ class ImageOrganizer
     end
     @location_counts = locations.tally
   end
+
+  def add_image_order_id_by_location_and_date
+    sorted = photos.sort_by do |photo|
+      [photo[1], photo[2]]
+      #   might change the nested array to a hash so we don't have magic numbers
+    end
+    current_location = sorted[0][1]
+    index = 0
+    sorted.each do |photo|
+      if current_location != photo[1]
+        index = 0
+        current_location = photo[1]
+      end
+      match = photos.find do |photo_file|
+        photo_file == photo
+      end
+      match << index += 1
+    end
+    photos
+  end
 end
