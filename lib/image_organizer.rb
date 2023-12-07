@@ -3,12 +3,11 @@ class ImageOrganizer
 
   def initialize(photo_file)
     @photos = IO.readlines(photo_file, chomp: true).map { |line| line.split(', ') }
-    # think about making this a method so it can be descriptive
   end
 
   def sort_photos
     location_counts = count_locations
-    photos_with_id = add_image_order_id
+    photos_with_id = find_order_ids
     new_photos = photos_with_id.map do |photo|
       new_photo_name(photo:, location_counts:)
     end
@@ -19,23 +18,23 @@ class ImageOrganizer
     locations = photos.map do |photo|
       photo[1]
     end
-    location_counts = locations.tally
+    locations.tally
   end
 
-  def add_image_order_id
+  def find_order_ids
     sorted = sort_by_location_and_date
     photos_with_id = photos.dup
-    current_location = sorted[0][1]
-    index = 0
+    current_location = ''
+    location_index = 0
     sorted.each do |photo|
       if current_location != photo[1]
-        index = 0
+        location_index = 0
         current_location = photo[1]
       end
       match = photos_with_id.find do |photo_file|
         photo_file == photo
       end
-      match << index += 1
+      match << location_index += 1
     end
     photos_with_id
   end
@@ -43,7 +42,6 @@ class ImageOrganizer
   def sort_by_location_and_date
     photos.sort_by do |photo|
       [photo[1], photo[2]]
-      #   might change the nested array to a hash so we don't have magic numbers
     end
   end
 

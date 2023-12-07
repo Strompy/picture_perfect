@@ -25,7 +25,7 @@ class ImageOrganizerTest < Minitest::Test
     HEREDOC
   end
 
-  def test_it_organizes_images
+  def test_it_sorts_photos
     image_organizer = ImageOrganizer.new(@test_input)
     assert_equal @expected_output, image_organizer.sort_photos
   end
@@ -46,7 +46,7 @@ class ImageOrganizerTest < Minitest::Test
     assert_equal expected_counts, image_organizer.count_locations
   end
 
-  def test_it_adds_image_order_id_by_location_and_date
+  def test_it_find_order_ids_by_location_and_date
     image_organizer = ImageOrganizer.new(@test_input)
     expect_order = [
       ['photo.jpg', 'Krakow', '2013-09-05 14:08:15', 2],
@@ -65,7 +65,7 @@ class ImageOrganizerTest < Minitest::Test
       ['f.png', 'Krakow', '2016-01-02 10:55:32', 5],
       ['g.jpg', 'Krakow', '2016-02-29 22:13:11', 10]
     ]
-    assert_equal expect_order, image_organizer.add_image_order_id
+    assert_equal expect_order, image_organizer.find_order_ids
   end
 
   def test_it_creates_new_name
