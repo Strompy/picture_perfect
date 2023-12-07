@@ -22,6 +22,6 @@ git clone git@github.com:Strompy/picture_perfect.git
 To run the minitest tests from the root directory use:
 
 ```
-$ ruby test/image_organizer_test.rb
+ruby test/image_organizer_test.rb
 ```
 
