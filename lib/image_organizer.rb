@@ -22,7 +22,7 @@ class ImageOrganizer
   def find_order_ids
     sorted = sort_by_location_and_date
     photos_with_id = photos.dup
-    current_location = ''
+    current_location = sorted[0][1]
     location_index = 0
     sorted.each do |photo|
       if current_location != photo[1]
