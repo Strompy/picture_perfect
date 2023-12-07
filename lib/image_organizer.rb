@@ -15,9 +15,7 @@ class ImageOrganizer
   end
 
   def count_locations
-    locations = photos.map do |photo|
-      photo[1]
-    end
+    locations = photos.map { |photo| photo[1] }
     locations.tally
   end
 
@@ -31,18 +29,14 @@ class ImageOrganizer
         location_index = 0
         current_location = photo[1]
       end
-      match = photos_with_id.find do |photo_file|
-        photo_file == photo
-      end
+      match = photos_with_id.find { |photo_file| photo_file == photo }
       match << location_index += 1
     end
     photos_with_id
   end
 
   def sort_by_location_and_date
-    photos.sort_by do |photo|
-      [photo[1], photo[2]]
-    end
+    photos.sort_by { |photo| [photo[1], photo[2]] }
   end
 
   def new_photo_name(photo:, location_counts:)
