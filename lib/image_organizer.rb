@@ -34,11 +34,8 @@ class ImageOrganizer
     @location_counts = locations.tally
   end
 
-  def add_image_order_id_by_location_and_date
-    sorted = photos.sort_by do |photo|
-      [photo[1], photo[2]]
-      #   might change the nested array to a hash so we don't have magic numbers
-    end
+  def add_image_order_id
+    sorted = sort_by_location_and_date
     current_location = sorted[0][1]
     index = 0
     sorted.each do |photo|
@@ -52,5 +49,12 @@ class ImageOrganizer
       match << index += 1
     end
     photos
+  end
+
+  def sort_by_location_and_date
+    photos.sort_by do |photo|
+      [photo[1], photo[2]]
+      #   might change the nested array to a hash so we don't have magic numbers
+    end
   end
 end
