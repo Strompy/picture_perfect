@@ -11,7 +11,7 @@ class ImageOrganizer
     count_locations
     add_image_order_id
     new_photos = photos.map do |photo|
-      new_photo_name(photo)
+      new_photo_name(photo:, location_counts:)
     end
     new_photos.join("\n")
   end
@@ -47,7 +47,7 @@ class ImageOrganizer
     end
   end
 
-  def new_photo_name(photo)
+  def new_photo_name(photo:, location_counts:)
     location = photo[1]
     id = photo[3].to_s.rjust(location_counts[location].to_s.length, '0')
     type = photo[0].split('.').last

@@ -70,12 +70,12 @@ class ImageOrganizerTest < Minitest::Test
 
   def test_it_creates_new_name
     image_organizer = ImageOrganizer.new(@test_input)
-    image_organizer.count_locations
+    location_counts = image_organizer.count_locations
     photo1 = ['photo.jpg', 'Krakow', '2013-09-05 14:08:15', 2]
-    assert_equal 'Krakow02.jpg', image_organizer.new_photo_name(photo1)
+    assert_equal 'Krakow02.jpg', image_organizer.new_photo_name(photo: photo1, location_counts:)
     photo2 = ['g.jpg', 'Krakow', '2016-02-29 22:13:11', 10]
-    assert_equal 'Krakow10.jpg', image_organizer.new_photo_name(photo2)
+    assert_equal 'Krakow10.jpg', image_organizer.new_photo_name(photo: photo2, location_counts:)
     photo3 = ['notredame.png', 'Florianopolis', '2015-09-01 12:00:00', 3]
-    assert_equal 'Florianopolis3.png', image_organizer.new_photo_name(photo3)
+    assert_equal 'Florianopolis3.png', image_organizer.new_photo_name(photo: photo3, location_counts:)
   end
 end
