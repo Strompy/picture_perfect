@@ -41,4 +41,9 @@ class ImageOrganizerTest < Minitest::Test
     assert_equal @expected_output, image_organizer.sort_photos
   end
 
+  def test_it_splits_the_input_string_into_lines
+    image_organizer = ImageOrganizer.new(@test_input)
+    assert_equal 15, image_organizer.photos.length
+    assert_equal ['photo.jpg', 'Krakow', '2013-09-05 14:08:15'], image_organizer.photos[0]
+  end
 end
