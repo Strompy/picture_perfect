@@ -46,4 +46,14 @@ class ImageOrganizerTest < Minitest::Test
     assert_equal 15, image_organizer.photos.length
     assert_equal ['photo.jpg', 'Krakow', '2013-09-05 14:08:15'], image_organizer.photos[0]
   end
+
+  def test_it_counts_locations
+    image_organizer = ImageOrganizer.new(@test_input)
+    expected_counts = {
+      'Krakow' => 10,
+      'London' => 2,
+      'Florianopolis' => 3
+    }
+    assert_equal expected_counts, image_organizer.count_locations
+  end
 end
