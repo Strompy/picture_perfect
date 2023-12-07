@@ -30,8 +30,8 @@ class ImageOrganizerTest < Minitest::Test
     assert image_organizer
     # parse the string into lines for each photo
     # count the number of repeated locations to get the max number of digits for the zero adjusted id
-
     # sort the photos by city and date
+
     # create the new name by adding the zero adjusted id to the end of the photo location
     # add the file extension to the end of the photo location
     # join the new sorted photo list into a string
@@ -76,6 +76,17 @@ class ImageOrganizerTest < Minitest::Test
       ['f.png', 'Krakow', '2016-01-02 10:55:32', 5],
       ['g.jpg', 'Krakow', '2016-02-29 22:13:11', 10]
     ]
-    assert_equal expect_order, image_organizer.add_image_order_id_by_location_and_date
+    assert_equal expect_order, image_organizer.add_image_order_id
+  end
+
+  def test_it_creates_new_name
+    image_organizer = ImageOrganizer.new(@test_input)
+    image_organizer.count_locations
+    photo1 = ['photo.jpg', 'Krakow', '2013-09-05 14:08:15', 2]
+    assert_equal 'Krakow02.jpg', image_organizer.new_photo_name(photo1)
+    photo2 = ['g.jpg', 'Krakow', '2016-02-29 22:13:11', 10]
+    assert_equal 'Krakow10.jpg', image_organizer.new_photo_name(photo2)
+    photo3 = ['notredame.png', 'Florianopolis', '2015-09-01 12:00:00', 3]
+    assert_equal 'Florianopolis3.png', image_organizer.new_photo_name(photo3)
   end
 end

@@ -57,4 +57,11 @@ class ImageOrganizer
       #   might change the nested array to a hash so we don't have magic numbers
     end
   end
+
+  def new_photo_name(photo)
+    location = photo[1]
+    id = photo[3].to_s.rjust(location_counts[location].to_s.length, '0')
+    type = photo[0].split('.').last
+    "#{location}#{id}.#{type}"
+  end
 end
