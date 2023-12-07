@@ -6,7 +6,7 @@ require 'pry'
 class ImageOrganizerTest < Minitest::Test
   def setup
     @test_input = './data/test_input.txt'
-    @expected_output = <<~HEREDOC
+    @expected_output = <<~HEREDOC.chomp
       Krakow02.jpg
       London1.png
       Krakow01.png
@@ -27,17 +27,6 @@ class ImageOrganizerTest < Minitest::Test
 
   def test_it_organizes_images
     image_organizer = ImageOrganizer.new(@test_input)
-    assert image_organizer
-    # parse the string into lines for each photo
-    # count the number of repeated locations to get the max number of digits for the zero adjusted id
-    # sort the photos by city and date
-
-    # create the new name by adding the zero adjusted id to the end of the photo location
-    # add the file extension to the end of the photo location
-    # join the new sorted photo list into a string
-
-    # return list of photos sorted by city and date with city name first followed by zero adjusted id
-
     assert_equal @expected_output, image_organizer.sort_photos
   end
 

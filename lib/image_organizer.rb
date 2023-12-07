@@ -8,23 +8,12 @@ class ImageOrganizer
   end
 
   def sort_photos
-    <<~HEREDOC
-      Krakow02.jpg
-      London1.png
-      Krakow01.png
-      Florianopolis2.jpg
-      Florianopolis1.jpg
-      London2.jpg
-      Florianopolis3.png
-      Krakow03.jpg
-      Krakow09.png
-      Krakow07.jpg
-      Krakow06.jpg
-      Krakow08.jpg
-      Krakow04.png
-      Krakow05.png
-      Krakow10.jpg
-    HEREDOC
+    count_locations
+    add_image_order_id
+    new_photos = photos.map do |photo|
+      new_photo_name(photo)
+    end
+    new_photos.join("\n")
   end
 
   def count_locations
