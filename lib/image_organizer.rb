@@ -1,8 +1,8 @@
 class ImageOrganizer
   attr_reader :photos
 
-  def initialize(photo_file)
-    @photos = IO.readlines(photo_file, chomp: true).map { |line| line.split(', ') }
+  def initialize(photo_filepath)
+    @photos = read_photos(photo_filepath)
   end
 
   def sort_photos
@@ -50,5 +50,11 @@ class ImageOrganizer
     id = photo[3].to_s.rjust(location_counts[location].to_s.length, '0')
     type = photo[0].split('.').last
     "#{location}#{id}.#{type}"
+  end
+
+  private
+
+  def read_photos(photo_filepath)
+    IO.readlines(photo_filepath, chomp: true).map { |line| line.split(', ') }
   end
 end
